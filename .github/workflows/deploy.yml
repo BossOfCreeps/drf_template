@@ -28,4 +28,5 @@ jobs:
 
       - name: Restart Gunicorn
         run: |
+          sudo systemctl daemon-reload
           sudo systemctl restart django-runserver

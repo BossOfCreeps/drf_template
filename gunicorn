@@ -1,0 +1,13 @@
+# /etc/systemd/system/django-runserver.service
+[Unit]
+Description=Django RunServer
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/actions-runner/_work/drf_template/drf_template
+ExecStart=python manage.py runserver 0.0.0.0:8080
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
