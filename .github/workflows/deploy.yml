@@ -29,3 +29,4 @@ jobs:
       - name: Start Django server
         run: |
           nohup python manage.py runserver 0.0.0.0:8000 > server.log &
+          disown -h %1
