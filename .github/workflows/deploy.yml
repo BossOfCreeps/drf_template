@@ -18,10 +18,14 @@ jobs:
         run: |
           pip install -r requirements.txt --break-system-packages
 
-      - name: Apply migrations
+      - name: Run migrations
         run: |
           python manage.py migrate
 
-      - name: Restart Gunicorn
+      - name: Stop previous runserver (if any)
         run: |
-          sudo systemctl restart gunicorn
+          pkill -f "python manage.py runserver" || true
+
+      - name: Start Django runserver
+        run: |
+          nohup python manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1 &
