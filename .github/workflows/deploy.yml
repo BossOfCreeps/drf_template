@@ -25,8 +25,7 @@ jobs:
       - name: Stop previous runserver (if any)
         run: |
           pkill -f "python manage.py runserver" || true
-      
-      - name: Start Django server
+
+      - name: Restart Gunicorn
         run: |
-          nohup python manage.py runserver 0.0.0.0:8000 > server.log &
-          disown -h %1
+          sudo systemctl restart gunicorn
