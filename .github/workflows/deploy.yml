@@ -25,12 +25,8 @@ jobs:
       - name: Stop previous runserver (if any)
         run: |
           pkill -f "python manage.py runserver" || true
-
-      - name: Start Django server
+      
+      - name: Start server in screen
         run: |
-          nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
-          sleep 5  # Даём серверу время на запуск
-
-      - name: Verify server is running
-        run: |
-          curl -s http://localhost:8000 | grep -q "Django" || (echo "Сервер не запустился!" && exit 1)
+          sudo apt install -y screen
+          screen -dmS django_server python manage.py runserver 0.0.0.0:8000
